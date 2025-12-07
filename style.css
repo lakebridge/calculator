@@ -1,0 +1,10 @@
+.container {
+    display: flex;
+    margin: 0 auto;
+    width: 30vw;
+    min-width: 200px;
+    aspect-ratio: 1/2;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: azure;
+}
