@@ -44,11 +44,19 @@ const operate = function(num1 ,num2 , operator) {
 
 
 const buttons = document.querySelectorAll("button");
+let operation = [];
+const display = document.querySelector(".display");
 
 buttons.forEach (button => {
     button.addEventListener ('click', () => {
         const value = button.textContent;
-        console.log(value);
+        if (value === "C") displat.textContent = "";
+        else if (value === "=") launch(operation);
+        else { 
+            operation.push(value);
+            display.textContent += value; 
+            console.log(value);
+        }
     }
     )
 
