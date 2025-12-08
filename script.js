@@ -43,3 +43,13 @@ const operate = function(num1 ,num2 , operator) {
 
 
 
+const buttons = document.querySelectorAll("button");
+
+buttons.forEach (button => {
+    button.addEventListener ('click', () => {
+        const value = button.textContent;
+        console.log(value);
+    }
+    )
+
+})

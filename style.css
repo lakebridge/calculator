@@ -26,9 +26,9 @@ p {
     display: flex;
     justify-content: right;
     align-items: center;
-    font-size: 40px;
+    font-size: 70px;
     color: rgb(47, 47, 47);
-    font-family: 'Courier New', Courier, monospace;
+    /* font-family: 'Source Sans Pro', monospace; */
     padding: 3px;
     /* aspect-ratio: 8/1;  */
     width: 100%;
@@ -60,4 +60,11 @@ p {
 .clear {
     background-color: brown;
     color: azure;
+}
+
+button {
+  transition: transform 0.15s ease;
+}
+button:hover {
+  transform: scale(1.05);
 }
