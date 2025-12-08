@@ -1,8 +1,8 @@
 p {
  display: flex;
- font-size: 60 px;
+ font-size: 100 px;
  justify-content: center;
- margin: 0 auto;
+ margin: 10px auto;
  width: 30%;
  font-weight: bold;
  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -53,4 +53,11 @@ p {
     width: 20%;
     aspect-ratio: 1/1;
     margin: 5px;
+    font-size: 60px;
+    min-width: max-content;
+}
+
+.clear {
+    background-color: brown;
+    color: azure;
 }
