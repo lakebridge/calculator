@@ -46,13 +46,34 @@ const operate = function(num1 ,num2 , operator) {
 const buttons = document.querySelectorAll("button");
 let operation = [];
 const display = document.querySelector(".display");
+let firstpress = true;
 
 buttons.forEach (button => {
     button.addEventListener ('click', () => {
         const value = button.textContent;
-        if (value === "C") displat.textContent = "";
-        else if (value === "=") launch(operation);
+        
+        if (value === "C") {
+            display.textContent = "";
+            operation =[];
+            firstpress = true;
+        }
+            
+        
+        else if (value === "=") {
+             display.textContent = "";
+             launch(operation);
+             firstpress = true;
+        }
+           
         else { 
+
+            if (firstpress === true) {
+                display.textContent = "";
+                operation =[];
+                firstpress = false;
+            }
+
+            console.log(firstpress);
             operation.push(value);
             display.textContent += value; 
             console.log(value);
