@@ -23,9 +23,9 @@ const factorial = function(n) {
   return n*factorial(n-1);
 };
 
-let num1 = '';
-let num2 = '';
-let operator = null;
+// let num1 = '';
+// let num2 = '';
+// let operator = null;
 
 const operate = function(num1 ,num2 , operator) {
     switch (operator) {
@@ -33,9 +33,9 @@ const operate = function(num1 ,num2 , operator) {
         break;
         case "-": return subtract(num1, num2);
         break;
-        case "*": return multiply(num1, num2);
+        case "×": return multiply(num1, num2);
         break;
-        case "**": return power(num1, num2);
+        case "^": return power(num1, num2);
         break;
     } 
 
@@ -44,9 +44,15 @@ const operate = function(num1 ,num2 , operator) {
 
 
 const buttons = document.querySelectorAll("button");
-let operation = [];
+const operators = ["+", "-", "×", "^", "/"];
+// let operation = [];
+let part1 = [];
+let part2 = [];
+let operator = null;
+let isPart1 = true;
+
 const display = document.querySelector(".display");
-let firstpress = true;
+let firstPress = true;
 
 buttons.forEach (button => {
     button.addEventListener ('click', () => {
@@ -54,30 +60,46 @@ buttons.forEach (button => {
         
         if (value === "C") {
             display.textContent = "";
-            operation =[];
-            firstpress = true;
+            // operation =[];
+            isPart1 ? part1 = [] : part2 = [];
+            firstPress = true;
         }
             
-        
         else if (value === "=") {
              display.textContent = "";
              launch(operation);
-             firstpress = true;
+             firstPress = true;
         }
            
         else { 
 
-            if (firstpress === true) {
+            if (firstPress === true) {
                 display.textContent = "";
-                operation =[];
-                firstpress = false;
+                part1 = part2 = [];
+                firstPress = false;
             }
 
             if (!isNaN(Number(value))) {
-                console.log("It's a number");
+                // operation.push(value);
+                isPart1 ? part1.push(value) : part2.push(value);
+                display.textContent += value; 
             }
-            operation.push(value);
-            display.textContent += value; 
+
+            if (operators.includes(value)) {
+                if (isPart1) {
+                    operator = value;
+                    isPart1 = false;
+                } else {
+                    result = operate (part1, part2, operator);
+                    display.textContent = result;
+                    part1 = result;
+                    operator = value;
+                }
+            }
+            console.log("part1", part1);
+            console.log("part2", part2);
+            console.log(operator);
+
             // console.log(value);
         }
     }
