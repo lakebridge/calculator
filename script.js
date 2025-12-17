@@ -73,10 +73,12 @@ buttons.forEach (button => {
                 firstpress = false;
             }
 
-            console.log(firstpress);
+            if (!isNaN(Number(value))) {
+                console.log("It's a number");
+            }
             operation.push(value);
             display.textContent += value; 
-            console.log(value);
+            // console.log(value);
         }
     }
     )
