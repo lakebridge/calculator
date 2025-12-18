@@ -10,10 +10,13 @@ const sum = function(array) {
 	return array.reduce((sum, current) => sum + current, 0);
 };
 
-const multiply = function(array) {
-  return array.reduce((total, current) => total*current, 1);
+const multiply = function(a, b) {
+  return a*b;
 };
 
+const divise =  function (a, b) {
+    return a-b;
+}
 const power = function(a,b) {
 	return a**b;
 };
@@ -36,6 +39,8 @@ const operate = function(num1 ,num2 , operator) {
         case "×": return multiply(num1, num2);
         break;
         case "^": return power(num1, num2);
+        break;
+        case "/": return devise(num1, num2);
         break;
     } 
 
@@ -65,23 +70,29 @@ buttons.forEach (button => {
             firstPress = true;
         }
             
-        else if (value === "=") {
-             display.textContent = "";
-             launch(operation);
-             firstPress = true;
+        else if (value === "=" && part2.length > 0) {
+            num1 = Number(part1.join(""));
+            num2 = Number(part2.join(""));
+            result = operate (num1, num2, operator);
+            display.textContent = result;
+            firstPress = true;
+            part1 = [result];
+            part2 = [];
         }
            
         else { 
 
-            if (firstPress === true) {
+            if (firstPress === true && !isNaN(Number(value))) {
                 display.textContent = "";
-                part1 = part2 = [];
                 firstPress = false;
             }
 
             if (!isNaN(Number(value))) {
                 // operation.push(value);
-                isPart1 ? part1.push(value) : part2.push(value);
+                if (isPart1) {
+                    part1.push(value);
+                } else part2.push(value);
+
                 display.textContent += value; 
             }
 
@@ -89,16 +100,22 @@ buttons.forEach (button => {
                 if (isPart1) {
                     operator = value;
                     isPart1 = false;
+                    firstPress = true;
+                    // console.log("operator", operator);
                 } else {
-                    result = operate (part1, part2, operator);
+                    num1 = Number(part1.join(""));
+                    num2 = Number(part2.join(""));
+                    result = operate (num1, num2, operator);
                     display.textContent = result;
-                    part1 = result;
+                    part1 = [result];
+                    part2 = [];
+                    firstPress = true;
                     operator = value;
                 }
             }
             console.log("part1", part1);
             console.log("part2", part2);
-            console.log(operator);
+            console.log("operator", operator);
 
             // console.log(value);
         }
