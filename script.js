@@ -10,12 +10,12 @@ const sum = function(array) {
 	return array.reduce((sum, current) => sum + current, 0);
 };
 
-const multiply = function(a, b) {
+const multiply = function(a,b) {
   return a*b;
 };
 
-const divise =  function (a, b) {
-    return a-b;
+const divide = function (a,b) {
+    return a/b;
 }
 const power = function(a,b) {
 	return a**b;
@@ -40,7 +40,7 @@ const operate = function(num1 ,num2 , operator) {
         break;
         case "^": return power(num1, num2);
         break;
-        case "/": return devise(num1, num2);
+        case "/": return divide(num1, num2);
         break;
     } 
 
@@ -55,6 +55,9 @@ let part1 = [];
 let part2 = [];
 let operator = null;
 let isPart1 = true;
+let result;
+let num1;
+let num2;
 
 const display = document.querySelector(".display");
 let firstPress = true;
@@ -71,13 +74,17 @@ buttons.forEach (button => {
         }
             
         else if (value === "=" && part2.length > 0) {
+            if (!isPart1) {
             num1 = Number(part1.join(""));
             num2 = Number(part2.join(""));
             result = operate (num1, num2, operator);
-            display.textContent = result;
+            display.textContent = Math.round(result*1000)/1000;
             firstPress = true;
-            part1 = [result];
+            part1 = [String(result)];
             part2 = [];
+            operator = null;
+            isPart1 = true;
+            }
         }
            
         else { 
@@ -85,37 +92,50 @@ buttons.forEach (button => {
             if (firstPress === true && !isNaN(Number(value))) {
                 display.textContent = "";
                 firstPress = false;
+                console.log ("firstPress happened");
             }
 
-            if (!isNaN(Number(value))) {
-                // operation.push(value);
-                if (isPart1) {
-                    part1.push(value);
-                } else part2.push(value);
+            // if (!isNaN(Number(value))) {
+            //     if (isPart1) {
+            //         part1.push(value);
+            //     } else part2.push(value);
 
-                display.textContent += value; 
-            }
+            //     display.textContent += value; 
+            // }
 
-            if (operators.includes(value)) {
-                if (isPart1) {
+             if (isPart1) {
+                 if (operators.includes(value)) {
                     operator = value;
                     isPart1 = false;
                     firstPress = true;
-                    // console.log("operator", operator);
-                } else {
+                 } else {
+                    part1.push(value);
+                    display.textContent += value; 
+                 }
+             } else {
+                 if (operators.includes(value)) {
+                    console.log("value", value);
                     num1 = Number(part1.join(""));
                     num2 = Number(part2.join(""));
                     result = operate (num1, num2, operator);
-                    display.textContent = result;
-                    part1 = [result];
+                    display.textContent = Math.round(result*1000)/1000;
+                    part1 = [];
+                    part1.push(String(result));
                     part2 = [];
-                    firstPress = true;
                     operator = value;
-                }
-            }
+                    firstPress = true;
+                    // isPart1 = true;
+                 } else {
+                    part2.push(value);
+                    display.textContent += value; 
+                 }
+             }
+            
             console.log("part1", part1);
             console.log("part2", part2);
             console.log("operator", operator);
+            console.log("isPar1", isPart1);
+            console.log("result", result);
 
             // console.log(value);
         }
