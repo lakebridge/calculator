@@ -46,7 +46,9 @@ const operate = function(num1 ,num2 , operator) {
 
 }
 
-
+function displayFunction(result) {
+     isFinite(result)? display.textContent = Math.round(result*1000)/1000 : display.textContent = "Error  I/O" ;
+}
 
 const buttons = document.querySelectorAll("button");
 const operators = ["+", "-", "×", "^", "/"];
@@ -54,6 +56,7 @@ const operators = ["+", "-", "×", "^", "/"];
 let part1 = [];
 let part2 = [];
 let operator = null;
+let isFirstOperator = true;
 let isPart1 = true;
 let result;
 let num1;
@@ -78,9 +81,9 @@ buttons.forEach (button => {
             num1 = Number(part1.join(""));
             num2 = Number(part2.join(""));
             result = operate (num1, num2, operator);
-            isFinite(result)? display.textContent = Math.round(result*1000)/1000 : display.textContent = "Error  I/O" ;
+            displayFunction(result);
             firstPress = true;
-            part1 = [String(result)];
+            part1 = [];
             part2 = [];
             operator = null;
             isPart1 = true;
@@ -120,9 +123,9 @@ buttons.forEach (button => {
                     num1 = Number(part1.join(""));
                     num2 = Number(part2.join(""));
                     result = operate (num1, num2, operator);
-                    isFinite(result)? display.textContent = Math.round(result*1000)/1000 : display.textContent = "Error  I/O" ;
+                    displayFunction(result);
                     part1 = [];
-                    part1.push(String(result));
+                    if (isFinite(result)) part1.push(String(result));
                     part2 = [];
                     operator = value;
                     firstPress = true;
