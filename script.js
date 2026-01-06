@@ -73,17 +73,19 @@ buttons.forEach (button => {
             firstPress = true;
         }
             
-        else if (value === "=" && part2.length > 0) {
-            if (!isPart1) {
+        else if (value === "=") {
+            if (part2.length > 0) {
             num1 = Number(part1.join(""));
             num2 = Number(part2.join(""));
             result = operate (num1, num2, operator);
-            display.textContent = Math.round(result*1000)/1000;
+            isFinite(result)? display.textContent = Math.round(result*1000)/1000 : display.textContent = "Error  I/O" ;
             firstPress = true;
             part1 = [String(result)];
             part2 = [];
             operator = null;
             isPart1 = true;
+            } else {
+                display.textContent = "Error";
             }
         }
            
@@ -118,7 +120,7 @@ buttons.forEach (button => {
                     num1 = Number(part1.join(""));
                     num2 = Number(part2.join(""));
                     result = operate (num1, num2, operator);
-                    display.textContent = Math.round(result*1000)/1000;
+                    isFinite(result)? display.textContent = Math.round(result*1000)/1000 : display.textContent = "Error  I/O" ;
                     part1 = [];
                     part1.push(String(result));
                     part2 = [];

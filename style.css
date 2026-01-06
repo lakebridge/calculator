@@ -27,10 +27,10 @@ p {
     justify-content: end;
     text-align: right;
     align-items: center;
-    font-size: 3rem;
+    font-size: 2rem;
     overflow: hidden;
     color: rgb(47, 47, 47);
-    /* font-family: 'Source Sans Pro', monospace; */
+    font-family: monospace;
     padding: 3px;
     /* aspect-ratio: 8/1;  */
     width: 100%;
